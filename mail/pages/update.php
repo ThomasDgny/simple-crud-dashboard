@@ -1,12 +1,11 @@
 <?php
 include "../server/db.php";
 include "../actions/addItem.php";
+include "../actions/getItem.php";
 
 $mail_id = $_GET['mail_id'];
-$sql = "SELECT * FROM `mails` WHERE id=$mail_id";
 
-$query = mysqli_query($db, $sql);
-$mail = mysqli_fetch_assoc($query);
+$mail = addItem($db, $mail_id);
 
 $email = $mail['email'];
 $name = $mail['name'];
