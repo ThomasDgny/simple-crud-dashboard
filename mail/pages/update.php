@@ -1,22 +1,18 @@
 <?php
 include "../server/db.php";
+include "../actions/addItem.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = htmlspecialchars($_POST['email']);
-    $name = htmlspecialchars($_POST['name']);
-    $message = htmlspecialchars($_POST['message']);
+$mail_id = $_GET['mail_id'];
+$sql = "SELECT * FROM `mails` WHERE id=$mail_id";
 
-    $sql = "insert into `mails`(email, name, message)
-    values('$email', '$name', '$message')";
-    
-    $result = mysqli_query($db, $sql);
+$query = mysqli_query($db, $sql);
+$mail = mysqli_fetch_assoc($query);
 
-    if($result) {
-        echo "Data has been inserted";
-    } else {
-        mysqli_error($db);
-    }
-}
+$email = $mail['email'];
+$name = $mail['name'];
+$message = $mail['message'];
+
+addItem("email", "name", "message", $mail_id, $db)
 
 ?>
 
@@ -34,24 +30,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="container mt-5">
 
         <div class="mb-5">
-            <h3>Send Your Message</h3>
+            <h3>Update</h3>
+            <h6><?php echo  $email; ?></h6>
         </div>
 
         <form method="post">
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
+                <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" value='<?php echo $email; ?>'>
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
 
             <div class="mb-3">
                 <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" aria-describedby="name">
+                <input type="text" class="form-control" id="name" name="name" aria-describedby="name" value='<?php echo $name; ?>'>
             </div>
 
             <div class="mb-3">
                 <label for="message" class="form-label">Comments</label>
-                <textarea class="form-control" name="message" placeholder="Leave a comment here" id="message" style="height: 200px"></textarea>
+                <textarea class="form-control" name="message" placeholder="Leave a comment here" id="message" style="height: 200px"><?php echo $message; ?></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary">Submit</button>

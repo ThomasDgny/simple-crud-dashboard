@@ -9,10 +9,13 @@
 </head>
 
 <body>
-    <h1>Hello, world!</h1>
-    <a href="form/form.php">Form Page</a>
-    <a href="mail/pages/dashboard.php">Mail</a>
-    
+
+    <div class="container py-5">
+        <h1>Projects</h1>
+        <a href="form/form.php">Simple Form</a>
+        </br>
+        <a href="mail/pages/dashboard.php">Mail Dashboard CRUD</a>
+    </div>
 </body>
 
 </html>
