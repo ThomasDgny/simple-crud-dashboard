@@ -17,6 +17,8 @@
         <a href="mail/pages/dashboard.php">Mail Dashboard CRUD</a>
         </br>
         <a href="functions/functions.php">Functions JS Methods To PHP</a>
+        </br>
+        <a href="sql/main.php">SQL</a>
     </div>
 </body>
 
